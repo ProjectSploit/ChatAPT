@@ -1,0 +1,26 @@
+kind = "mobile"
+previewPath = "/"
+title = "ChatAPT Mobile"
+version = "1.0.0"
+id = "artifacts/chatapt-mobile"
+router = "expo-domain"
+
+[[integratedSkills]]
+name = "expo"
+version = "1.0.0"
+
+[[services]]
+name = "expo"
+paths = [ "/" ]
+localPort = 18433
+
+[services.development]
+run = "pnpm --filter @workspace/chatapt-mobile run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/chatapt-mobile", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/chatapt-mobile", "run", "serve" ]
+
+[services.env]
+PORT = "18433"
+BASE_PATH = "/"

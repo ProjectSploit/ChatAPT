@@ -165,7 +165,7 @@ function flushPending(state: ParseState, res: any, fullContent: { text: string }
 
 async function doSearch(query: string): Promise<SearchResult[]> {
   const [googleRes, serperRes] = await Promise.allSettled([
-    fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_CSE_KEY!}&cx=${process.env.GOOGLE_CSE_CX!}&q=...`)
+    fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_CSE_KEY!}&cx=${process.env.GOOGLE_CSE_CX!}&q=${encodeURIComponent(query)}`).then(r => r.json()),
     fetch("https://google.serper.dev/search", {
       method: "POST",
       headers: { "X-API-KEY": process.env.SERPER_KEY!, "Content-Type": "application/json" },
